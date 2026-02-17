@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Box, Paper } from "@mui/material";
+import { Box, Paper, Button } from "@mui/material";
 
 export const AuthContainer = styled(Box)({
   display: "flex",
@@ -41,4 +41,29 @@ export const FormSection = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   padding: theme.spacing(4),
+}));
+
+export const StyledSignInButton = styled(Button)(({ theme }) => ({
+  width: "160px",
+  height: "55px",
+
+  // Color and Shape
+  backgroundColor: "#2563EB",
+  borderRadius: "9px",
+  padding: "16px 10px",
+
+  textTransform: "none",
+  color: "#FFFFFF",
+  fontWeight: 600,
+  fontSize: "16px",
+
+  boxShadow: "none",
+  "&:hover": {
+    backgroundColor: "#1D4ED8",
+    boxShadow: "0px 4px 12px rgba(37, 99, 235, 0.2)",
+  },
+
+  marginTop: "40px",
+
+  transition: "all 0.2s ease-in-out",
 }));

@@ -95,7 +95,13 @@ const LoginPage = () => {
           <TextField
             fullWidth
             placeholder="School Login User Id"
-            sx={{ mb: 3 }}
+            sx={{
+              mb: 3,
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "12px",
+                backgroundColor: "#F8FAFC",
+              },
+            }}
           />
           {/* 2. REPLACED: Enhanced Password Field with Toggle */}
           <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 500 }}>
@@ -120,8 +126,8 @@ const LoginPage = () => {
             }}
             sx={{
               "& .MuiOutlinedInput-root": {
-                borderRadius: "12px", // Match Figma radius
-                backgroundColor: "#F8FAFC", // Match Figma bg
+                borderRadius: "12px",
+                backgroundColor: "#F8FAFC",
               },
             }}
           />
@@ -144,25 +150,17 @@ const LoginPage = () => {
               Forgot password?
             </Link>
           </Box>
-          <Button
-            onClick={handleSignIn}
-            fullWidth
+          <S.StyledSignInButton
             variant="contained"
-            size="large"
-            sx={{
-              mt: 5,
-              py: 1.5,
-              textTransform: "none",
-              borderRadius: "12px",
-              fontWeight: "bold",
-            }}
+            onClick={handleSignIn}
+            disabled={isLoading}
           >
             {isLoading ? "Signing In..." : "Sign In"}
-          </Button>
-          <Typography variant="body2" align="center" color="#64748B" mt={5}>
+          </S.StyledSignInButton>
+          <Typography variant="body2" align="lef" color="#64748B" mt={5}>
             Don't have an account?{" "}
             <Link href="mailto:gurukul.ai@gurukul.in" underline="none">
-              Contact us
+              gurukul.ai@gurukul.in
             </Link>
           </Typography>
         </Box>

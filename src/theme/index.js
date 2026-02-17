@@ -10,13 +10,13 @@ export const gurukulTheme = createTheme({
   typography: {
     fontFamily: "'Inter', sans-serif",
     h2: {
-      fontSize: "60px", //
+      fontSize: "60px",
       fontWeight: 600,
       lineHeight: "66px",
       letterSpacing: "-2px",
     },
     body1: {
-      fontSize: "18px", //
+      fontSize: "18px",
       lineHeight: "30px",
     },
   },
