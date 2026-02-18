@@ -9,6 +9,7 @@ import {
   NotificationsNone as NotificationsNoneIcon,
   KeyboardArrowDown as KeyboardArrowDownIcon,
   KeyboardArrowUp as KeyboardArrowUpIcon,
+  Search as SearchIcon,
 } from "@mui/icons-material";
 import * as S from "./DashboardStyles";
 
@@ -19,10 +20,17 @@ const schoolData = [
   { id: "SCH-004", name: "Sunrise Public", location: "Nagpur, MH" },
 ];
 
+const NAV_ITEMS = [
+  { label: "Dashboard", icon: <DashboardIcon />, active: true },
+  { label: "School", icon: <SchoolIcon /> },
+  { label: "Class", icon: <SchoolIcon /> },
+  { label: "Session", icon: <SchoolIcon /> },
+  { label: "Settings", icon: <LogoutIcon /> },
+];
+
 const DashboardPage = () => {
   return (
     <S.DashboardContainer>
-      {/* Sidebar Section */}
       <S.SidebarContainer>
         <Box>
           <S.SidebarHeader>
@@ -38,15 +46,27 @@ const DashboardPage = () => {
             </Stack>
           </S.SidebarHeader>
 
+          <S.SearchSectionContainer>
+            <S.SearchWrapper>
+              <S.SearchInputGroup>
+                <SearchIcon sx={{ fontSize: 18, color: "#64748B" }} />
+                <S.SearchInput
+                  placeholder="Search"
+                  sx={{ height: "15.01px", fontSize: "14px" }}
+                />
+              </S.SearchInputGroup>
+              <S.ShortcutBadge>Ctrl+K</S.ShortcutBadge>
+            </S.SearchWrapper>
+            <S.SidebarToggleButton size="small">
+              <S.CustomChevronWrapper>
+                <img src="/assets/Vector.png" alt="chevron" />
+              </S.CustomChevronWrapper>
+            </S.SidebarToggleButton>
+          </S.SearchSectionContainer>
+
           <S.NavSection>
             <S.NavLabel>School Management</S.NavLabel>
-            {[
-              { label: "Dashboard", icon: <DashboardIcon />, active: true },
-              { label: "School", icon: <SchoolIcon /> },
-              { label: "Class", icon: <SchoolIcon /> },
-              { label: "Session", icon: <SchoolIcon /> },
-              { label: "Settings", icon: <LogoutIcon /> },
-            ].map((item) => (
+            {NAV_ITEMS.map((item) => (
               <S.NavItem
                 key={item.label}
                 active={item.active}
@@ -63,7 +83,6 @@ const DashboardPage = () => {
         </S.SidebarFooter>
       </S.SidebarContainer>
 
-      {/* Main Content Wrapper */}
       <S.MainContentWrapper>
         <S.ContentHeader>
           <S.UserProfileWrapper>
@@ -112,7 +131,6 @@ const DashboardPage = () => {
           </S.UserProfileWrapper>
         </S.ContentHeader>
 
-        {/* Dashboard Content Body */}
         <S.MainBodyContainer>
           <S.DashboardHeaderBar mb={4}>
             <Box>
@@ -129,8 +147,8 @@ const DashboardPage = () => {
           </S.DashboardHeaderBar>
 
           <S.CardRowWrapper>
-            {schoolData.map((school) => (
-              <S.SchoolCard key={school.id}>
+            {schoolData.map(({ id, name, location }) => (
+              <S.SchoolCard key={id}>
                 <S.CardContent>
                   <Stack direction="row" alignItems="center" gap="12px">
                     <Avatar
@@ -142,14 +160,14 @@ const DashboardPage = () => {
                     >
                       <SchoolIcon />
                     </Avatar>
-                    <Typography fontWeight={600}>{school.name}</Typography>
+                    <Typography fontWeight={600}>{name}</Typography>
                   </Stack>
                   <Box>
                     <Typography variant="caption" color="textSecondary">
-                      ID: {school.id}
+                      ID: {id}
                     </Typography>
                     <Typography variant="body2" color="textSecondary">
-                      {school.location}
+                      {location}
                     </Typography>
                   </Box>
                   <Button
