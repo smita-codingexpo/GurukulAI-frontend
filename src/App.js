@@ -5,7 +5,7 @@ import { ThemeProvider, CssBaseline } from "@mui/material";
 import { store } from "./app/store";
 import { gurukulTheme } from "./theme";
 import LoginPage from "./pages/LoginPage/LoginPage";
-import DashboardPage from "./pages/Dashboard/DashboardPage";
+import DashboardPage from "./pages/Dashboard/DashboardPage.jsx";
 
 function App() {
   return (
