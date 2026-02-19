@@ -25,7 +25,7 @@ export const SidebarContainer = styled(FlexBox)({
   flexDirection: "column",
   justifyContent: "space-between",
   width: "296px",
-  height: "100%",
+  height: "925px",
   background: "#FFFFFF",
   borderRight: "1px solid #E8E8E8",
   flexShrink: 0,
@@ -40,33 +40,48 @@ export const SidebarHeader = styled(FlexBox)({
 
 export const NavSection = styled(FlexBox)({
   flexDirection: "column",
-  gap: "4px",
+  alignItems: "flex-start",
+  width: "264px",
+  height: "837px",
+  gap: "18px",
   padding: "16px",
-});
-
-export const NavLabel = styled(Typography)({
-  fontSize: "12px",
-  fontWeight: 600,
-  color: "#64748B",
-  textTransform: "uppercase",
-  padding: "12px 8px 8px",
-  letterSpacing: "0.05em",
+  overflowY: "auto",
+  overflowX: "hidden",
+  "&::-webkit-scrollbar": { width: "4px" },
+  "&::-webkit-scrollbar-thumb": { background: "#E2E8F0", borderRadius: "10px" },
 });
 
 export const NavItem = styled(Button, {
   shouldForwardProp: (p) => p !== "active",
 })(({ active }) => ({
-  justifyContent: "flex-start",
-  width: "100%",
-  padding: "10px 16px",
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+  width: "264px",
+  height: "44px",
+  padding: "12px 16px",
   borderRadius: "8px",
   textTransform: "none",
-  fontSize: "14px",
-  fontWeight: active ? 600 : 500,
-  color: active ? "#FFFFFF" : "#475569",
-  backgroundColor: active ? "#2563EB" : "transparent",
-  "&:hover": { backgroundColor: active ? "#1D4ED8" : "#F1F5F9" },
-  "& .MuiButton-startIcon": { color: active ? "#FFFFFF" : "#64748B" },
+  backgroundColor: active ? "#EFF6FF" : "transparent",
+  "& .MuiButton-startIcon": {
+    margin: 0,
+    marginRight: "10px",
+    color: active ? "#2563EB" : "#64748B",
+  },
+}));
+
+export const ArrowWrapper = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "isExpanded",
+})(({ isExpanded }) => ({
+  width: "20px",
+  height: "9px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  transition: "transform 0.3s ease",
+  transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
+  "& svg": { fontSize: "18px", color: "#64748B" },
 }));
 
 export const SidebarFooter = styled(Box)({
@@ -193,19 +208,16 @@ export const CardContent = styled(FlexBox)({
   height: "100%",
 });
 
-export const SearchSectionContainer = styled(Box)({
-  display: "flex",
+export const SearchSectionContainer = styled(FlexBox)({
   flexDirection: "row",
   alignItems: "center",
   width: "264px",
   height: "49px",
   padding: "8px",
   gap: "8px",
-  boxSizing: "border-box",
 });
 
-export const SearchWrapper = styled(Box)({
-  display: "flex",
+export const SearchWrapper = styled(FlexBox)({
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "space-between",
@@ -214,7 +226,6 @@ export const SearchWrapper = styled(Box)({
   padding: "8px 16px",
   borderRadius: "24px",
   background: "rgba(245, 246, 250, 1)",
-  boxSizing: "border-box",
   cursor: "text",
 });
 
@@ -225,10 +236,7 @@ export const SearchInput = styled(InputBase)({
   "& .MuiInputBase-input": {
     padding: 0,
     color: "#64748B",
-    "&::placeholder": {
-      opacity: 1,
-      color: "#94A3B8",
-    },
+    "&::placeholder": { opacity: 1, color: "#94A3B8" },
   },
 });
 
@@ -273,37 +281,75 @@ export const SidebarToggleButton = styled(IconButton)({
   boxSizing: "border-box",
 });
 
-export const VectorIconButton = styled(IconButton)({
-  width: "27px",
-  height: "27px",
-  border: "1px solid rgba(171, 171, 171, 1)",
-  borderRadius: "50%",
-  padding: 0,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundColor: "transparent",
-  transition: "all 0.2s ease-in-out",
-  "&:hover": {
-    backgroundColor: "rgba(171, 171, 171, 0.1)",
-    borderColor: "rgba(100, 116, 139, 1)",
-  },
-  "& svg": {
-    fontSize: "14px",
-    color: "rgba(171, 171, 171, 1)",
-  },
-  boxSizing: "border-box",
-});
-
 export const CustomChevronWrapper = styled(Box)({
   width: "5.58px",
   height: "11.25px",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  "& img": {
-    width: "100%",
-    height: "100%",
-    objectFit: "contain",
-  },
+  "& img": { width: "100%", height: "100%", objectFit: "contain" },
+});
+
+export const NavItemLabel = styled(Typography)({
+  width: "160px",
+  height: "19px",
+  fontFamily: "'Inter', sans-serif",
+  fontWeight: 500,
+  fontSize: "16px",
+  lineHeight: "100%",
+  color: "rgba(64, 64, 64, 1)",
+  display: "flex",
+  alignItems: "center",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  boxSizing: "border-box",
+});
+
+export const SubNavContainer = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  gap: "4px",
+  width: "264px",
+  paddingLeft: "16px",
+  marginTop: "4px",
+});
+
+export const SubNavItem = styled(Box, {
+  shouldForwardProp: (p) => p !== "active",
+})(({ active }) => ({
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  width: "264px",
+  height: "44px",
+  padding: "12px 16px",
+  gap: "16px",
+  borderRadius: "8px",
+  cursor: "pointer",
+  backgroundColor: active ? "rgba(21, 93, 252, 1)" : "transparent",
+  color: active ? "#FFFFFF" : "rgba(64, 64, 64, 1)",
+  transition: "all 0.2s ease",
+  "&:hover": { backgroundColor: active ? "rgba(21, 93, 252, 1)" : "#F8FAFC" },
+}));
+
+export const SubNavSpacer = styled(Box)({
+  width: "20px",
+  height: "20px",
+  flexShrink: 0,
+});
+
+export const SubNavLabel = styled(Typography)({
+  width: "160px",
+  height: "19px",
+  fontFamily: "'Inter', sans-serif",
+  fontSize: "16px",
+  fontWeight: 500,
+  lineHeight: "100%",
+  display: "flex",
+  alignItems: "center",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  color: "inherit",
 });

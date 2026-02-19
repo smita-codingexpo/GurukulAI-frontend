@@ -1,7 +1,14 @@
-import React from "react";
-import { Typography, Box, Avatar, Stack, Badge, Button } from "@mui/material";
+import React, { useState } from "react";
 import {
-  Dashboard as DashboardIcon,
+  Typography,
+  Box,
+  Avatar,
+  Stack,
+  Badge,
+  Button,
+  Collapse,
+} from "@mui/material";
+import {
   School as SchoolIcon,
   Logout as LogoutIcon,
   Add as AddIcon,
@@ -11,24 +18,19 @@ import {
   KeyboardArrowUp as KeyboardArrowUpIcon,
   Search as SearchIcon,
 } from "@mui/icons-material";
+import { NAV_ITEMS, schoolData } from "./Dashboardpagejson";
 import * as S from "./DashboardStyles";
 
-const schoolData = [
-  { id: "SCH-001", name: "Gurukul Global", location: "Pune, MH" },
-  { id: "SCH-002", name: "Orchid Heights", location: "Mumbai, MH" },
-  { id: "SCH-003", name: "Heritage Academy", location: "Nashik, MH" },
-  { id: "SCH-004", name: "Sunrise Public", location: "Nagpur, MH" },
-];
-
-const NAV_ITEMS = [
-  { label: "Dashboard", icon: <DashboardIcon />, active: true },
-  { label: "School", icon: <SchoolIcon /> },
-  { label: "Class", icon: <SchoolIcon /> },
-  { label: "Session", icon: <SchoolIcon /> },
-  { label: "Settings", icon: <LogoutIcon /> },
-];
-
 const DashboardPage = () => {
+  const [openItems, setOpenItems] = useState([]);
+  const [activeTab, setActiveTab] = useState("sm-dashboard");
+
+  const handleToggle = (id) => {
+    setOpenItems((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
+    );
+  };
+
   return (
     <S.DashboardContainer>
       <S.SidebarContainer>
@@ -65,16 +67,38 @@ const DashboardPage = () => {
           </S.SearchSectionContainer>
 
           <S.NavSection>
-            <S.NavLabel>School Management</S.NavLabel>
-            {NAV_ITEMS.map((item) => (
-              <S.NavItem
-                key={item.label}
-                active={item.active}
-                startIcon={item.icon}
-              >
-                {item.label}
-              </S.NavItem>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              const isOpen = openItems.includes(item.id);
+              return (
+                <Box key={item.id} sx={{ width: "100%", mb: 1 }}>
+                  <S.NavItem
+                    active={isOpen}
+                    startIcon={item.icon}
+                    onClick={() => handleToggle(item.id)}
+                  >
+                    <S.NavItemLabel>{item.name}</S.NavItemLabel>
+                    <S.ArrowWrapper isExpanded={isOpen}>
+                      <KeyboardArrowDownIcon />
+                    </S.ArrowWrapper>
+                  </S.NavItem>
+
+                  <Collapse in={isOpen} timeout="auto" unmountOnExit>
+                    <S.SubNavContainer>
+                      {item.children?.map((child) => (
+                        <S.SubNavItem
+                          key={child.id}
+                          active={activeTab === child.id}
+                          onClick={() => setActiveTab(child.id)}
+                        >
+                          <S.SubNavSpacer />
+                          <S.SubNavLabel>{child.name}</S.SubNavLabel>
+                        </S.SubNavItem>
+                      ))}
+                    </S.SubNavContainer>
+                  </Collapse>
+                </Box>
+              );
+            })}
           </S.NavSection>
         </Box>
 
