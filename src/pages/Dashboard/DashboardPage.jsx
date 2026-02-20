@@ -47,64 +47,68 @@ const DashboardPage = () => {
               </Typography>
             </Stack>
           </S.SidebarHeader>
+          <S.SidebarWrapper>
+            <S.SearchSectionContainer>
+              <S.SearchWrapper>
+                <S.SearchInputGroup>
+                  <SearchIcon sx={{ fontSize: 18, color: "#64748B" }} />
+                  <S.SearchInput
+                    placeholder="Search"
+                    sx={{ height: "15.01px", fontSize: "14px" }}
+                  />
+                </S.SearchInputGroup>
+                <S.ShortcutBadge>Ctrl+K</S.ShortcutBadge>
+              </S.SearchWrapper>
+              <S.SidebarToggleButton size="small">
+                <S.CustomChevronWrapper>
+                  <img src="/assets/Vector.png" alt="chevron" />
+                </S.CustomChevronWrapper>
+              </S.SidebarToggleButton>
+            </S.SearchSectionContainer>
 
-          <S.SearchSectionContainer>
-            <S.SearchWrapper>
-              <S.SearchInputGroup>
-                <SearchIcon sx={{ fontSize: 18, color: "#64748B" }} />
-                <S.SearchInput
-                  placeholder="Search"
-                  sx={{ height: "15.01px", fontSize: "14px" }}
-                />
-              </S.SearchInputGroup>
-              <S.ShortcutBadge>Ctrl+K</S.ShortcutBadge>
-            </S.SearchWrapper>
-            <S.SidebarToggleButton size="small">
-              <S.CustomChevronWrapper>
-                <img src="/assets/Vector.png" alt="chevron" />
-              </S.CustomChevronWrapper>
-            </S.SidebarToggleButton>
-          </S.SearchSectionContainer>
+            <S.NavSection>
+              {NAV_ITEMS.map((item) => {
+                const isOpen = openItems.includes(item.id);
+                return (
+                  <Box key={item.id} sx={{ width: "100%", mb: 1 }}>
+                    <S.NavItem
+                      active={isOpen}
+                      startIcon={item.icon}
+                      onClick={() => handleToggle(item.id)}
+                    >
+                      <S.NavItemLabel>{item.name}</S.NavItemLabel>
+                      <S.ArrowWrapper isExpanded={isOpen}>
+                        <KeyboardArrowDownIcon />
+                      </S.ArrowWrapper>
+                    </S.NavItem>
 
-          <S.NavSection>
-            {NAV_ITEMS.map((item) => {
-              const isOpen = openItems.includes(item.id);
-              return (
-                <Box key={item.id} sx={{ width: "100%", mb: 1 }}>
-                  <S.NavItem
-                    active={isOpen}
-                    startIcon={item.icon}
-                    onClick={() => handleToggle(item.id)}
-                  >
-                    <S.NavItemLabel>{item.name}</S.NavItemLabel>
-                    <S.ArrowWrapper isExpanded={isOpen}>
-                      <KeyboardArrowDownIcon />
-                    </S.ArrowWrapper>
-                  </S.NavItem>
+                    <Collapse in={isOpen} timeout="auto" unmountOnExit>
+                      <S.SubNavContainer>
+                        {item.children?.map((child) => (
+                          <S.SubNavItem
+                            key={child.id}
+                            active={activeTab === child.id}
+                            onClick={() => setActiveTab(child.id)}
+                          >
+                            <S.SubNavSpacer />
+                            <S.SubNavLabel>{child.name}</S.SubNavLabel>
+                          </S.SubNavItem>
+                        ))}
+                      </S.SubNavContainer>
+                    </Collapse>
+                  </Box>
+                );
+              })}
+            </S.NavSection>
 
-                  <Collapse in={isOpen} timeout="auto" unmountOnExit>
-                    <S.SubNavContainer>
-                      {item.children?.map((child) => (
-                        <S.SubNavItem
-                          key={child.id}
-                          active={activeTab === child.id}
-                          onClick={() => setActiveTab(child.id)}
-                        >
-                          <S.SubNavSpacer />
-                          <S.SubNavLabel>{child.name}</S.SubNavLabel>
-                        </S.SubNavItem>
-                      ))}
-                    </S.SubNavContainer>
-                  </Collapse>
-                </Box>
-              );
-            })}
-          </S.NavSection>
+            <S.SidebarFooter>
+              <S.FooterDivider />
+              <S.LogoutButton startIcon={<LogoutIcon />}>
+                <S.LogoutLabel>Log out</S.LogoutLabel>
+              </S.LogoutButton>
+            </S.SidebarFooter>
+          </S.SidebarWrapper>
         </Box>
-
-        <S.SidebarFooter>
-          <S.NavItem startIcon={<LogoutIcon />}>Log out</S.NavItem>
-        </S.SidebarFooter>
       </S.SidebarContainer>
 
       <S.MainContentWrapper>

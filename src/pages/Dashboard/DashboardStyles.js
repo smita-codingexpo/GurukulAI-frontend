@@ -25,7 +25,7 @@ export const SidebarContainer = styled(FlexBox)({
   flexDirection: "column",
   justifyContent: "space-between",
   width: "296px",
-  height: "925px",
+  height: "996px",
   background: "#FFFFFF",
   borderRight: "1px solid #E8E8E8",
   flexShrink: 0,
@@ -44,7 +44,7 @@ export const NavSection = styled(FlexBox)({
   width: "264px",
   height: "837px",
   gap: "18px",
-  padding: "16px",
+  padding: "8px",
   overflowY: "auto",
   overflowX: "hidden",
   "&::-webkit-scrollbar": { width: "4px" },
@@ -83,11 +83,6 @@ export const ArrowWrapper = styled(Box, {
   transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
   "& svg": { fontSize: "18px", color: "#64748B" },
 }));
-
-export const SidebarFooter = styled(Box)({
-  padding: "16px",
-  borderTop: "1px solid #F1F5F9",
-});
 
 export const MainContentWrapper = styled(FlexBox)({
   flex: 1,
@@ -306,33 +301,6 @@ export const NavItemLabel = styled(Typography)({
   boxSizing: "border-box",
 });
 
-export const SubNavContainer = styled(Box)({
-  display: "flex",
-  flexDirection: "column",
-  gap: "4px",
-  width: "264px",
-  paddingLeft: "16px",
-  marginTop: "4px",
-});
-
-export const SubNavItem = styled(Box, {
-  shouldForwardProp: (p) => p !== "active",
-})(({ active }) => ({
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
-  width: "264px",
-  height: "44px",
-  padding: "12px 16px",
-  gap: "16px",
-  borderRadius: "8px",
-  cursor: "pointer",
-  backgroundColor: active ? "rgba(21, 93, 252, 1)" : "transparent",
-  color: active ? "#FFFFFF" : "rgba(64, 64, 64, 1)",
-  transition: "all 0.2s ease",
-  "&:hover": { backgroundColor: active ? "rgba(21, 93, 252, 1)" : "#F8FAFC" },
-}));
-
 export const SubNavSpacer = styled(Box)({
   width: "20px",
   height: "20px",
@@ -353,3 +321,111 @@ export const SubNavLabel = styled(Typography)({
   textOverflow: "ellipsis",
   color: "inherit",
 });
+
+export const SidebarFooter = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  width: "264px",
+  height: "56px",
+  gap: "24px",
+  boxSizing: "border-box",
+  justifyContent: "center",
+});
+
+export const FooterDivider = styled(Box)({
+  width: "251px",
+  height: "0px",
+  borderTop: "1px solid rgba(208, 213, 221, 1)",
+  transform: "rotate(0deg)",
+});
+
+export const FooterNavItem = styled(NavItem)({
+  width: "100%",
+  margin: 0,
+});
+
+export const SidebarWrapper = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  width: "296px",
+  height: "925px",
+  flexShrink: 0,
+  padding: "16px",
+  backgroundColor: "#FFFFFF",
+  borderRight: "1px solid #E8E8E8",
+  boxSizing: "border-box",
+  overflow: "hidden",
+});
+
+export const LogoutLabel = styled(Typography)({
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  width: "67px",
+  height: "19px",
+  padding: "0 4px",
+  fontSize: "14px",
+  fontWeight: 500,
+  color: "#000000",
+  lineHeight: "100%",
+  whiteSpace: "nowrap",
+  boxSizing: "border-box",
+});
+
+export const LogoutButton = styled(Button)({
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  width: "264px",
+  height: "32px",
+  gap: "4px",
+  padding: "6px 8px",
+  borderRadius: "4px",
+  textTransform: "none",
+
+  "& .MuiButton-startIcon": {
+    margin: 0,
+    width: "20px",
+    height: "20px",
+    color: "#000000",
+    transform: "rotate(180deg)",
+    "& svg": {
+      fontSize: "16px",
+    },
+  },
+
+  "&:hover": {
+    background: "rgba(21, 93, 252, 1))",
+  },
+});
+
+export const SubNavContainer = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  width: "264px",
+  padding: 0,
+  marginTop: "4px",
+});
+
+export const SubNavItem = styled(Box, {
+  shouldForwardProp: (p) => p !== "active",
+})(({ active }) => ({
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  width: "264px",
+  height: "44px",
+  gap: "21px",
+  padding: "12px 16px",
+  borderRadius: "8px",
+  cursor: "pointer",
+  backgroundColor: active ? "rgba(21, 93, 252, 1)" : "transparent",
+  color: active ? "#FFFFFF" : "rgba(64, 64, 64, 1)",
+  transition: "all 0.2s ease",
+
+  "&:hover": {
+    backgroundColor: active ? "rgba(21, 93, 252, 1)" : "#F8FAFC",
+  },
+}));
